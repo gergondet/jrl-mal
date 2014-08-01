@@ -307,7 +307,7 @@ namespace maal
 	      double vw;
 	      int lw=-1;
 
-	      int linfo; const int n=NR,m=NC;
+	      int linfo; const int n=static_cast<int>(NR),m=static_cast<int>(NC);
 	      int lda = std::max(m,n);
 	      int lu = traits::leading_dimension(U); // NR
 	      int lvt = traits::leading_dimension(VT); // NC
@@ -317,7 +317,7 @@ namespace maal
 		      0, 0, &m, 0, &n, &vw, &lw, &linfo);
 	      lw = int(vw)+5;
 
-	      ::boost::numeric::ublas::vector<double> w(lw);
+	      ::boost::numeric::ublas::vector<double> w(static_cast<unsigned int>(lw));
 	      dgesvd_(&Jobu, &Jobvt,&n,&m,
 		      MRAWDATA(I),
 		      &lda,
@@ -426,7 +426,7 @@ namespace maal
 	      {
 		double vw;
 
-		int linfo; const int n=NR,m=NC;
+		int linfo; const int n=static_cast<int>(NR),m=static_cast<int>(NC);
 		int lda = std::max(m,n);
 		int lu = traits::leading_dimension(U); // NR
 		int lvt = traits::leading_dimension(VT); // NC
@@ -436,7 +436,7 @@ namespace maal
 			0, 0, &m, 0, &n, &vw, &lw, &linfo);
 		lw = int(vw)+5;
 
-		::boost::numeric::ublas::vector<double> w(lw);
+		::boost::numeric::ublas::vector<double> w(static_cast<unsigned int>(lw));
 		dgesvd_(&Jobu, &Jobvt,&n,&m,
 			MRAWDATA(I),
 			&lda,
@@ -699,7 +699,7 @@ namespace maal
 	  {
 	    const unsigned int l =  nbRows();
 
-	    const div_t q = div(elmt,l);
+	    const div_t q = div(static_cast<int>(elmt),static_cast<int>(l));
 	    const int r = q.quot;
 	    const int c = q.rem;
 	    return elementAt(static_cast<unsigned int>(r),static_cast<unsigned int>(c));
@@ -707,7 +707,7 @@ namespace maal
 	  inline FloatType& elementAt( const unsigned int elmt )
 	  {
 	    const unsigned int l =  nbRows();
-	    const div_t q = div(elmt,l);
+	    const div_t q = div(static_cast<int>(elmt),static_cast<int>(l));
 	    const int r = q.quot;
 	    const int c = q.rem;
 	    return elementAt(static_cast<unsigned int>(r),static_cast<unsigned int>(c));
