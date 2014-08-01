@@ -162,16 +162,16 @@ namespace maal{
 	inline FloatType* datablock( void );
 	inline const FloatType* datablock( void ) const;
 
-	inline Matrix& extract( const int top,const int left,
-				const int nbrows, const int nbcols,
+	inline Matrix& extract( const unsigned int top,const unsigned int left,
+				const unsigned int nbrows, const unsigned int nbcols,
 				Matrix& C ) const;
-	inline Matrix extract( const int top,const int left,
-			       const int nbrows, const int nbcols ) const;
+	inline Matrix extract( const unsigned int top,const unsigned int left,
+			       const unsigned int nbrows, const unsigned int nbcols ) const;
 
-	inline const FloatType& elementAt( const int row,const int col ) const;
-	inline FloatType& elementAt( const int row,const int col );
-	inline const FloatType& elementAt( const int elmt ) const;
-	inline FloatType& elementAt( const int elmt ) ;
+	inline const FloatType& elementAt( const unsigned int row,const unsigned int col ) const;
+	inline FloatType& elementAt( const unsigned int row,const unsigned int col );
+	inline const FloatType& elementAt( const unsigned int elmt ) const;
+	inline FloatType& elementAt( const unsigned int elmt ) ;
 
 	/* ------------- */
 	/* --- BONUS --- */
@@ -198,10 +198,10 @@ namespace maal{
 
 	inline friend Matrix operator- ( const Matrix& m );
 
-	inline const FloatType& operator()( const int i,const int j )const;
-	inline FloatType& operator()( const int i,const int j );
-	inline const FloatType& operator()( const int n )const ;
-	inline FloatType& operator()( const int n ) ;
+	inline const FloatType& operator()( const unsigned int i,const unsigned int j )const;
+	inline FloatType& operator()( const unsigned int i,const unsigned int j );
+	inline const FloatType& operator()( const unsigned int n )const ;
+	inline FloatType& operator()( const unsigned int n ) ;
 
 	inline Matrix& operator= ( const Matrix&m1 );
 

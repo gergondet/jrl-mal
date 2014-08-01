@@ -331,10 +331,10 @@ namespace maal
 	    }
 
 
-	    const size_t nsv = s.size();
+	    const std::size_t nsv = s.size();
 	    unsigned int rankJ = 0;
 	    ::boost::numeric::ublas::vector<FloatType> sp(nsv);
-	    for( size_t i=0;i<nsv;++i )
+	    for( std::size_t i=0;i<nsv;++i )
 	      if( fabs(s(i))>threshold ) { sp(i)=1/s(i); rankJ++; }
 	      else sp(i)=0.;
 	    invMatrix.matrix.clear();
@@ -450,10 +450,10 @@ namespace maal
 
 	    }
 
-	    const size_t nsv = s.size();
+	    const std::size_t nsv = s.size();
 	    unsigned int rankJ = 0;
 	    ::boost::numeric::ublas::vector<FloatType> sp(nsv);
-	    for( size_t i=0;i<nsv;++i )
+	    for( std::size_t i=0;i<nsv;++i )
 	      {
 		if( fabs(s(i))>threshold*.1 )   rankJ++;
 		sp(i)=s(i)/(s(i)*s(i)+threshold*threshold);
@@ -667,8 +667,8 @@ namespace maal
 	  }
 
 	  inline Matrix&
-	    extract( const int top,const int left,
-		     const int nbrows, const int nbcols,
+	    extract( const unsigned int top,const unsigned int left,
+		     const unsigned int nbrows, const unsigned int nbcols,
 		     Matrix& C ) const
 	  {
 	    MAAL_CHECKVERBOSE(_checksize(matrix,top+nbrows-1,left+nbcols-1));
@@ -679,38 +679,38 @@ namespace maal
 	    return C;
 	  }
 	  inline Matrix
-	    extract( const int top,const int left,
-		     const int nbrows, const int nbcols ) //const
+	    extract( const unsigned int top,const unsigned int left,
+		     const unsigned int nbrows, const unsigned int nbcols ) //const
 	  { Matrix C(nbrows,nbcols); return extract(top,left,nbrows,nbcols,C); }
 
 
 
-	  inline const FloatType& elementAt( const int row,const int col ) const
+	  inline const FloatType& elementAt( const unsigned int row,const unsigned int col ) const
 	  {
 	    MAAL_CHECKVERBOSE(_checksize( matrix,row,col ));
 	    return matrix(row,col);
 	  }
-	  inline FloatType& elementAt( const int row,const int col )
+	  inline FloatType& elementAt( const unsigned int row,const unsigned int col )
 	  {
 	    MAAL_CHECKVERBOSE(_checksize( matrix,row,col ));
 	    return matrix(row,col);
 	  }
-	  inline const FloatType& elementAt( const int elmt ) const
+	  inline const FloatType& elementAt( const unsigned int elmt ) const
 	  {
 	    const unsigned int l =  nbRows();
 
 	    const div_t q = div(elmt,l);
 	    const int r = q.quot;
 	    const int c = q.rem;
-	    return elementAt(r,c);
+	    return elementAt(static_cast<unsigned int>(r),static_cast<unsigned int>(c));
 	  }
-	  inline FloatType& elementAt( const int elmt )
+	  inline FloatType& elementAt( const unsigned int elmt )
 	  {
 	    const unsigned int l =  nbRows();
 	    const div_t q = div(elmt,l);
 	    const int r = q.quot;
 	    const int c = q.rem;
-	    return elementAt(r,c);
+	    return elementAt(static_cast<unsigned int>(r),static_cast<unsigned int>(c));
 	  }
 
 	  //@}
@@ -782,10 +782,10 @@ namespace maal
 	  inline friend Matrix operator- ( const Matrix& m ){ return m.opposite(); }
 	  //{ return multiply(*this,x,*this); }
 
-	  inline const FloatType& operator()( const int i,const int j )const { return matrix(i,j); }
-	  inline FloatType& operator()( const int i,const int j ){ return matrix(i,j); }
-	  inline const FloatType& operator()( const int n )const { return elementAt(n); }
-	  inline FloatType& operator()( const int n ) { return elementAt(n); }
+	  inline const FloatType& operator()( const unsigned int i,const unsigned int j )const { return matrix(i,j); }
+	  inline FloatType& operator()( const unsigned int i,const unsigned int j ){ return matrix(i,j); }
+	  inline const FloatType& operator()( const unsigned int n )const { return elementAt(n); }
+	  inline FloatType& operator()( const unsigned int n ) { return elementAt(n); }
 
 	  inline Matrix& operator= ( const Matrix&m1 ){ matrix=m1.matrix; return *this;}
 
